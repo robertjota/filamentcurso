@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployeeResource\Pages;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
+use App\Filament\Resources\EmployeeResource\Widgets\EmployeeStatsOverview;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class EmployeeResource extends Resource
 {
     protected static ?string $model = Employee::class;
+    // protected static ?string $navigationLabel = 'Custom Navigation Label';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
@@ -68,8 +70,7 @@ class EmployeeResource extends Resource
                             ->reactive(),
 
                         Select::make('department_id')
-                            ->relationship('department', 'name')->required()
-                            ->maxLength(200),
+                            ->relationship('department', 'name')->required(),
                         TextInput::make('first_name')->required()
                             ->maxLength(200),
                         TextInput::make('last_name')->required()
@@ -111,6 +112,13 @@ class EmployeeResource extends Resource
     {
         return [
             //
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            EmployeeStatsOverview::class,
         ];
     }
 
