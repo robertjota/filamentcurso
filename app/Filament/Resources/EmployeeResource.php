@@ -89,12 +89,12 @@ class EmployeeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('#')->rowIndex(),
-                TextColumn::make('first_name')->sortable()->searchable(),
-                TextColumn::make('last_name')->sortable()->searchable(),
-                TextColumn::make('department.name')->sortable(),
-                TextColumn::make('phone_number')->sortable()->searchable(),
-                TextColumn::make('date_hired')->date('d M Y'),
-                TextColumn::make('birth_date')->date('d M Y'),
+                TextColumn::make('first_name')->sortable()->searchable()->toggleable(),
+                TextColumn::make('last_name')->sortable()->searchable()->toggleable(),
+                TextColumn::make('department.name')->sortable()->toggleable(),
+                TextColumn::make('phone_number')->sortable()->searchable()->toggleable(),
+                TextColumn::make('date_hired')->date('d M Y')->toggleable(),
+                TextColumn::make('birth_date')->date('d M Y')->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('department')
